@@ -1,72 +1,177 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-body { background: #000; color: #FFF; }
-section { scroll-margin-top: 100px; }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cine Play - IPTV Premium | Promoção</title>
+    <meta name="description" content="IPTV Premium com 5000+ canais e Filmes. A partir de R$8,90. Assine agora.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-.barra-oferta { background: #E50914; text-align: center; padding: 10px; font-weight: 700; font-size: 14px; position: fixed; top: 0; width: 100%; z-index: 1001; }
-#contador { color: #FFD700; }
+    <div class="barra-oferta">
+        🚨 PROMOÇÃO LIMITADA: A PARTIR DE R$8,90 - ACABA EM: <span id="contador"></span> 🚨
+    </div>
 
-#popup-saida, #popup-nome { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
-.popup-conteudo { background: #111; padding: 40px; border-radius: 10px; text-align: center; border: 2px solid #E50914; max-width: 400px; position: relative; }
-.popup-conteudo h2 { color: #E50914; margin-bottom: 15px; }
-.popup-conteudo input { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #333; background: #222; color: #FFF; border-radius: 5px; }
-.popup-conteudo button, .btn-popup { background: #E50914; color: #FFF; border: none; padding: 12px 25px; border-radius: 5px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; }
-.fechar-popup { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; }
+    <div id="popup-saida">
+        <div class="popup-conteudo">
+            <span class="fechar-popup" onclick="fecharPopupSaida()">X</span>
+            <h2>ESPERA! NÃO VAI AINDA 😱</h2>
+            <p>GANHE <strong>10% OFF</strong> EXTRA</p>
+            <p>Use o cupom: <strong>SAIDA10</strong></p>
+            <a href="#planos" onclick="fecharPopupSaida()" class="btn-popup">PEGAR MEU DESCONTO</a>
+        </div>
+    </div>
 
-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: fixed; width: 100%; top: 45px; z-index: 1000; }
-.logo { font-size: 28px; font-weight: 900; }
-.logo span { color: #E50914; }
-.menu { display: flex; gap: 30px; }
-.menu a { color: #FFF; text-decoration: none; font-weight: 700; cursor: pointer; }
-.btn-contato { background: #E50914; padding: 10px 20px; border-radius: 5px; }
-.menu-toggle { display: none; font-size: 30px; color: #FFF; cursor: pointer; }
+    <div id="popup-nome">
+        <div class="popup-conteudo">
+            <h2>Bem-vindo à Cine Play! 👋</h2>
+            <p>Qual seu nome pra eu te atender melhor?</p>
+            <input type="text" id="inputNome" placeholder="Digite seu nome aqui">
+            <button onclick="salvarNome()">COMEÇAR AGORA</button>
+        </div>
+    </div>
 
-header { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 100px; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1920') center/cover; }
-.hero-texto h1 { font-size: 50px; font-weight: 900; color: #FFF; }
-.hero-texto p { font-size: 20px; margin: 20px 0; }
-.btn-cta { background: #E50914; color: #FFF; padding: 15px 40px; border-radius: 5px; text-decoration: none; font-weight: 700; font-size: 18px; transition: 0.3s; display: inline-block; }
-.btn-cta:hover { background: #b20710; transform: scale(1.05); }
+    <nav id="navbar">
+        <div class="logo">CINE<span>PLAY</span></div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <div class="menu" id="menu-mobile">
+            <a href="#planos" onclick="toggleMenu()">Planos</a>
+            <a href="#canais" onclick="toggleMenu()">Canais</a>
+            <a href="#faq" onclick="toggleMenu()">FAQ</a>
+            <a onclick="abrirWhats('quero informações'); toggleMenu()" class="btn-contato">FALAR NO WHATS</a>
+        </div>
+    </nav>
 
-.canais { padding: 80px 5%; text-align: center; }
-.canais h2 { font-size: 36px; margin-bottom: 10px; }
-.grid-canais { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 40px; }
-.canal-logo { background: #111; padding: 30px; border-radius: 10px; font-weight: 700; border: 1px solid #222; }
+    <header id="home">
+        <div class="hero-texto">
+            <h1 id="titulo-personalizado">A MELHOR IPTV DO BRASIL</h1>
+            <p>5.000+ Canais | Filmes e Séries | 4K | Sem Travamentos</p>
+            <a href="#planos" class="btn-cta">VER PLANOS E PREÇOS</a>
+        </div>
+    </header>
 
-.planos { padding: 80px 5%; text-align: center; }
-.planos h2 { font-size: 36px; margin-bottom: 40px; }
-.grid-planos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.plano { background: #111; padding: 40px 20px; border-radius: 10px; border: 1px solid #222; position: relative; transition: 0.3s; }
-.plano:hover { transform: translateY(-10px); border: 1px solid #E50914; }
-.plano.destaque { border: 2px solid #E50914; transform: scale(1.05); }
-.plano.destaque:hover { transform: scale(1.08) translateY(-10px); }
-.mais-vendido { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #E50914; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 700; }
-.plano h3 { font-size: 24px; margin-bottom: 20px; }
-.preco { font-size: 40px; font-weight: 900; color: #E50914; }
-.preco span { font-size: 20px; font-weight: 400; color: #AAA; }
-.plano ul { list-style: none; margin: 20px 0; min-height: 120px; }
-.plano li { margin: 10px 0; }
-.btn-plano { background: #333; color: #FFF; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: 700; cursor: pointer; display: block; transition: 0.3s; }
-.btn-plano:hover { background: #555; }
-.plano.destaque .btn-plano { background: #E50914; }
-.plano.destaque .btn-plano:hover { background: #b20710; }
+    <section id="canais" class="canais">
+        <h2>MAIS DE 5.000 CANAIS LIBERADOS</h2>
+        <p>Todos os canais abertos, fechados, esportes, filmes e infantis em HD e 4K</p>
+        <div class="grid-canais">
+            <div class="canal-logo">GLOBO</div>
+            <div class="canal-logo">SPORTV</div>
+            <div class="canal-logo">HBO</div>
+            <div class="canal-logo">DISCOVERY</div>
+            <div class="canal-logo">CARTOON</div>
+            <div class="canal-logo">TELECINE</div>
+        </div>
+    </section>
 
-.depoimentos { padding: 80px 5%; background: #0a0a0a; text-align: center; }
-.depoimentos h2 { font-size: 36px; margin-bottom: 40px; }
-.grid-depo { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.depo { background: #111; padding: 30px; border-radius: 10px; border-left: 3px solid #E50914; }
+    <section id="planos" class="planos">
+        <h2>ESCOLHA SEU PLANO</h2>
+        <div class="grid-planos">
+            <div class="plano">
+                <h3>1 Mês</h3>
+                <p class="preco">R$8<span>,90</span></p>
+                <ul><li>5.000 Canais</li><li>Filmes e Séries</li><li>Suporte 24h</li><li>2 Dispositivos</li></ul>
+                <a onclick="abrirWhats('quero plano de 1 mes')" class="btn-plano">ASSINAR AGORA</a>
+            </div>
+            <div class="plano destaque">
+                <span class="mais-vendido">MAIS VENDIDO</span>
+                <h3>2 Meses</h3>
+                <p class="preco">R$19<span>,60</span></p>
+                <ul><li>5.000 Canais</li><li>Filmes e Séries</li><li>Suporte 24h</li><li>2 Dispositivos</li><li><strong>ECONOMIZE R$2,20</strong></li></ul>
+                <a onclick="abrirWhats('quero plano de 2 meses')" class="btn-plano">PEGAR OFERTA</a>
+            </div>
+            <div class="plano">
+                <h3>3 Meses</h3>
+                <p class="preco">R$29<span>,40</span></p>
+                <ul><li>5.000 Canais</li><li>Filmes e Séries</li><li>Suporte 24h</li><li>2 Dispositivos</li><li><strong>ECONOMIZE R$6,30</strong></li></ul>
+                <a onclick="abrirWhats('quero plano de 3 meses')" class="btn-plano">ASSINAR AGORA</a>
+            </div>
+        </div>
+    </section>
 
-.faq { padding: 80px 5%; }
-.faq h2 { font-size: 36px; text-align: center; margin-bottom: 40px; }
-.pergunta { background: #111; padding: 20px; margin-bottom: 15px; border-radius: 5px; }
+    <section class="depoimentos">
+        <h2>QUEM JÁ É CINE PLAY APROVA</h2>
+        <div class="grid-depo">
+            <div class="depo"><p>"Nunca mais tive problema. Roda liso na minha Smart TV."</p><span>- Carlos S.</span></div>
+            <div class="depo"><p>"Melhor custo benefício. Tem todos os canais de futebol."</p><span>- Fernanda R.</span></div>
+            <div class="depo"><p>"Suporte responde na hora. Recomendo demais!"</p><span>- João P.</span></div>
+        </div>
+    </section>
 
-footer { text-align: center; padding: 40px 5%; background: #000; border-top: 1px solid #222; }
+    <section id="faq" class="faq">
+        <h2>PERGUNTAS FREQUENTES</h2>
+        <div class="pergunta"><h3>Como funciona? <span>+</span></h3><p>Após o pagamento você recebe login e senha na hora pra usar em 2 aparelhos.</p></div>
+        <div class="pergunta"><h3>Funciona na Smart TV? <span>+</span></h3><p>Sim! Funciona em Smart TV, Celular, TV Box, Computador e Fire Stick.</p></div>
+        <div class="pergunta"><h3>Tem teste grátis? <span>+</span></h3><p>Sim! Fale com a gente no WhatsApp e peça 3 horas de teste grátis.</p></div>
+    </section>
 
-.whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: #FFF; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 999; animation: pulsar 2s infinite; }
-@keyframes pulsar { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+    <footer>
+        <p>CINE PLAY © 2026 - Todos os direitos reservados.</p>
+        <p>Suporte: (11) 94351-0381</p>
+    </footer>
 
-@media(max-width: 768px) {
-    .menu-toggle { display: block; }
-    .menu { display: none; position: absolute; top: 65px; left: 0; width: 100%; background: #000; flex-direction: column; padding: 20px; border-top: 2px solid #E50914; }
-    .menu.active { display: flex; }
-    .hero-texto h1 { font-size: 32px; }
-          }
+    <a onclick="abrirWhats('olá')" class="whatsapp-float">💬</a>
+
+<script>
+    // CONTADOR
+    const dataFinal = new Date().getTime() + (2 * 24 * 60 * 60 * 1000);
+    setInterval(function() {
+        const agora = new Date().getTime();
+        const distancia = dataFinal - agora;
+        const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+        document.getElementById("contador").innerHTML = horas + "h " + minutos + "m " + segundos + "s ";
+    }, 1000);
+
+    // MENU MOBILE
+    function toggleMenu() {
+        document.getElementById('menu-mobile').classList.toggle('active');
+    }
+
+    // POPUP SAIDA
+    let popupSaidaMostrado = false;
+    document.addEventListener('mouseleave', function(e) {
+        if (e.clientY < 0 && !popupSaidaMostrado && window.innerWidth > 768) {
+            document.getElementById('popup-saida').style.display = 'flex';
+            popupSaidaMostrado = true;
+        }
+    });
+    function fecharPopupSaida() {
+        document.getElementById('popup-saida').style.display = 'none';
+    }
+
+    // POPUP NOME - AGORA FORÇA MESMO NO CELULAR
+    function salvarNome() {
+        const nome = document.getElementById('inputNome').value;
+        if(nome.trim() !== "") {
+            localStorage.setItem('nomeUsuario', nome);
+            document.getElementById('titulo-personalizado').innerText = nome + ", SUA TV MERECE O MELHOR";
+            document.getElementById('popup-nome').style.display = 'none';
+        } else {
+            alert("Por favor, digite seu nome!");
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            const nomeSalvo = localStorage.getItem('nomeUsuario');
+            if(!nomeSalvo) {
+                document.getElementById('popup-nome').style.display = 'flex';
+            } else {
+                document.getElementById('titulo-personalizado').innerText = nomeSalvo + ", SUA TV MERECE O MELHOR";
+            }
+        }, 1000);
+    });
+
+    // WHATSAPP
+    function abrirWhats(mensagem) {
+        const nome = localStorage.getItem('nomeUsuario') || 'Cliente';
+        const texto = `Olá! Meu nome é ${nome}. ${mensagem}`;
+        const numero = "5511943510381";
+        window.open(`https://wa.me/${numero}?text=${encodeURIComponent(texto)}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
