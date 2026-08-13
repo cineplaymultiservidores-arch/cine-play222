@@ -3,141 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cine Play - IPTV Premium | Promoção</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PerfilScan - Busca Grátis</title>
     <style>
-        /* TRAVA A TELA ENQUANTO NÃO COLOCAR O NOME */
-        body.travado { overflow: hidden; }
-        #popup-nome { display: flex !important; } /* FORÇA APARECER */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        html, body { background: #05050A; color: #FFF; }
+        :root { --roxo: #7C3AED; --roxo-claro: #A855F7; }
+        .barra-topo { background: linear-gradient(90deg, var(--roxo), var(--roxo-claro)); text-align: center; padding: 10px; font-weight: 700; }
+        nav { display: flex; justify-content: space-between; padding: 20px 5%; background: rgba(5,5,10,0.8); border-bottom: 1px solid #1A1A2E; }
+        .logo { font-size: 26px; font-weight: 900; } .logo span { color: var(--roxo); }
+        header { text-align: center; padding: 60px 5%; }
+        .tag { background: rgba(124,58,237,0.2); border: 1px solid var(--roxo); padding: 8px 20px; border-radius: 20px; font-size: 13px; color: var(--roxo-claro); }
+        .hero-texto h1 { font-size: 42px; font-weight: 900; margin: 20px 0; } .hero-texto h1 span { color: var(--roxo); }
+        .caixa-busca { background: #0F0F1A; padding: 25px; border-radius: 15px; border: 1px solid #1A1A2E; display: flex; gap: 10px; max-width: 700px; margin: 20px auto; flex-wrap: wrap; }
+        .caixa-busca input { flex: 1; min-width: 200px; padding: 15px; border: 1px solid #1A1A2E; background: #05050A; color: #FFF; border-radius: 8px; font-size: 16px; }
+        .caixa-busca button { background: linear-gradient(90deg, var(--roxo), var(--roxo-claro)); color: #FFF; border: none; padding: 15px 30px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 16px; }
+        .resultado { text-align: center; padding: 60px 5%; background: #0F0F1A; }
+        .grid-resultado { max-width: 700px; margin: 0 auto; }
+        .card-resultado { background: #05050A; padding: 30px; border-radius: 15px; border: 1px solid var(--roxo); text-align: left; margin-top: 20px; }
+        .item-rede { margin: 12px 0; } .item-rede a { color: var(--roxo); text-decoration: none; }
+        .tag-gratis { background: var(--roxo); padding: 6px 14px; border-radius: 15px; font-size: 12px; font-weight: 700; margin-top: 20px; display: inline-block; }
+        .loading { color: var(--roxo); font-size: 20px; font-weight: 700; }
     </style>
 </head>
-<body class="travado"> <!-- JÁ COMEÇA TRAVADO -->
+<body>
 
-    <div id="popup-nome">
-        <div class="popup-conteudo">
-            <h2>Bem-vindo à Cine Play! 👋</h2>
-            <p>Pra continuar, qual seu nome?</p>
-            <input type="text" id="inputNome" placeholder="Digite seu nome aqui" autofocus>
-            <button onclick="salvarNome()">ENTRAR NO SITE</button>
-        </div>
-    </div>
+    <div class="barra-topo">🚀 FERRAMENTA 100% GRÁTIS</div>
 
-    <div class="barra-oferta">
-        🚨 PROMOÇÃO LIMITADA: A PARTIR DE R$8,90 - ACABA EM: <span id="contador"></span> 🚨
-    </div>
-
-    <nav id="navbar">
-        <div class="logo">CINE<span>PLAY</span></div>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-        <div class="menu" id="menu-mobile">
-            <a href="#planos" onclick="toggleMenu()">Planos</a>
-            <a href="#canais" onclick="toggleMenu()">Canais</a>
-            <a href="#faq" onclick="toggleMenu()">FAQ</a>
-            <a onclick="abrirWhats('quero informações'); toggleMenu()" class="btn-contato">FALAR NO WHATS</a>
-        </div>
+    <nav>
+        <div class="logo">PERFIL<span>SCAN</span></div>
     </nav>
 
-    <header id="home">
+    <header>
         <div class="hero-texto">
-            <h1 id="titulo-personalizado">A MELHOR IPTV DO BRASIL</h1>
-            <p>5.000+ Canais | Filmes e Séries | 4K | Sem Travamentos</p>
-            <a href="#planos" class="btn-cta">VER PLANOS E PREÇOS</a>
+            <span class="tag">BUSCA GRÁTIS</span>
+            <h1>Encontre Perfis em <span>Segundos</span></h1>
+            <p>Digite um nome e veja possíveis perfis</p>
+            
+            <div class="caixa-busca">
+                <input type="text" id="nomeBusca" placeholder="Digite o Nome Completo">
+                <input type="text" id="cidadeBusca" placeholder="Cidade - Opcional">
+                <button type="button" onclick="fazerBuscaFake()">BUSCAR GRÁTIS</button>
+            </div>
         </div>
     </header>
 
-    <section id="canais" class="canais">
-        <h2>MAIS DE 5.000 CANAIS LIBERADOS</h2>
-        <div class="grid-canais">
-            <div class="canal-logo">GLOBO</div>
-            <div class="canal-logo">SPORTV</div>
-            <div class="canal-logo">HBO</div>
-            <div class="canal-logo">DISCOVERY</div>
-            <div class="canal-logo">CARTOON</div>
-            <div class="canal-logo">TELECINE</div>
+    <section id="resultado" class="resultado">
+        <h2>RESULTADO</h2>
+        <div id="listaResultados" class="grid-resultado">
+            <p>Digite um nome acima e clique em buscar</p>
         </div>
     </section>
-
-    <section id="planos" class="planos">
-        <h2>ESCOLHA SEU PLANO</h2>
-        <div class="grid-planos">
-            <div class="plano">
-                <h3>1 Mês</h3>
-                <p class="preco">R$8<span>,90</span></p>
-                <ul><li>5.000 Canais</li><li>Filmes e Séries</li><li>Suporte 24h</li></ul>
-                <a onclick="abrirWhats('quero plano de 1 mes')" class="btn-plano">ASSINAR AGORA</a>
-            </div>
-            <div class="plano destaque">
-                <span class="mais-vendido">MAIS VENDIDO</span>
-                <h3>2 Meses</h3>
-                <p class="preco">R$19<span>,60</span></p>
-                <ul><li>5.000 Canais</li><li>Filmes e Séries</li><li>Suporte 24h</li><li><strong>ECONOMIZE R$2,20</strong></li></ul>
-                <a onclick="abrirWhats('quero plano de 2 meses')" class="btn-plano">PEGAR OFERTA</a>
-            </div>
-            <div class="plano">
-                <h3>3 Meses</h3>
-                <p class="preco">R$29<span>,40</span></p>
-                <ul><li>5.000 Canais</li><li>Filmes e Séries</li><li>Suporte 24h</li><li><strong>ECONOMIZE R$6,30</strong></li></ul>
-                <a onclick="abrirWhats('quero plano de 3 meses')" class="btn-plano">ASSINAR AGORA</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="faq" class="faq">
-        <h2>PERGUNTAS FREQUENTES</h2>
-        <div class="pergunta"><h3>Como funciona? <span>+</span></h3><p>Após o pagamento você recebe login e senha na hora.</p></div>
-    </section>
-
-    <footer>
-        <p>CINE PLAY © 2026 - Todos os direitos reservados.</p>
-    </footer>
-
-    <a onclick="abrirWhats('olá')" class="whatsapp-float">💬</a>
 
 <script>
-    // CONTADOR
-    const dataFinal = new Date().getTime() + (2 * 24 * 60 * 60 * 1000);
-    setInterval(function() {
-        const agora = new Date().getTime();
-        const distancia = dataFinal - agora;
-        const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-        const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
-        document.getElementById("contador").innerHTML = horas + "h " + minutos + "m " + segundos + "s ";
-    }, 1000);
-
-    function toggleMenu() {
-        document.getElementById('menu-mobile').classList.toggle('active');
-    }
-
-    // POPUP NOME OBRIGATÓRIO
-    function salvarNome() {
-        const nome = document.getElementById('inputNome').value;
-        if(nome.trim() !== "") {
-            localStorage.setItem('nomeUsuario', nome);
-            document.getElementById('titulo-personalizado').innerText = nome + ", SUA TV MERECE O MELHOR";
-            document.getElementById('popup-nome').style.display = 'none';
-            document.body.classList.remove('travado'); // DESTRAVA A TELA
-        } else {
-            alert("Por favor, digite seu nome para continuar!");
+    function fazerBuscaFake() {
+        console.log("Botão clicado"); // pra testar
+        const nome = document.getElementById('nomeBusca').value;
+        const cidade = document.getElementById('cidadeBusca').value;
+        const resultadoDiv = document.getElementById('listaResultados');
+        
+        if(nome.trim() === "") { 
+            alert("Digite um nome para buscar!"); 
+            return; 
         }
-    }
-    
-    // VERIFICA SE JÁ TEM NOME SALVO
-    window.addEventListener('load', function() {
-        const nomeSalvo = localStorage.getItem('nomeUsuario');
-        if(nomeSalvo) {
-            document.getElementById('popup-nome').style.display = 'none';
-            document.body.classList.remove('travado');
-            document.getElementById('titulo-personalizado').innerText = nomeSalvo + ", SUA TV MERECE O MELHOR";
-        }
-    });
 
-    // WHATSAPP
-    function abrirWhats(mensagem) {
-        const nome = localStorage.getItem('nomeUsuario') || 'Cliente';
-        const texto = `Olá! Meu nome é ${nome}. ${mensagem}`;
-        const numero = "5511943510381";
-        window.open(`https://wa.me/${numero}?text=${encodeURIComponent(texto)}`, '_blank');
+        resultadoDiv.innerHTML = `<div class="loading">Buscando... aguarde</div>`;
+        
+        setTimeout(() => {
+            const user = nome.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g, '');
+            const numeros = Math.floor(Math.random() * 999);
+
+            resultadoDiv.innerHTML = `
+                <div class="card-resultado">
+                    <h3>${Math.floor(Math.random() * 4) + 2} Perfis para: ${nome}</h3>
+                    <div class="item-rede"><b>Instagram:</b> <a href="https://instagram.com/${user}" target="_blank">@${user}</a></div>
+                    <div class="item-rede"><b>Instagram 2:</b> <a href="https://instagram.com/${user}${numeros}" target="_blank">@${user}${numeros}</a></div>
+                    <div class="item-rede"><b>Facebook:</b> <a href="https://facebook.com/${user}" target="_blank">facebook.com/${user}</a></div>
+                    <div class="item-rede"><b>TikTok:</b> <a href="https://tiktok.com/@${user}" target="_blank">@${user}</a></div>
+                    <p style="margin-top:15px; color:#888;">Cidade: ${cidade || 'Não informada'}</p>
+                    <span class="tag-gratis">RESULTADO GERADO</span>
+                </div>
+            `;
+        }, 1200);
+
+        document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
     }
 </script>
 
