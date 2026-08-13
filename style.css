@@ -32,38 +32,28 @@ header { height: 100vh; display: flex; align-items: center; justify-content: cen
 .grid-canais { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 40px; }
 .canal-logo { background: #111; padding: 30px; border-radius: 10px; font-weight: 700; border: 1px solid #222; }
 
-.tvbox { display: flex; align-items: center; gap: 50px; padding: 80px 5%; background: #0a0a0a; }
-.tvbox-img { position: relative; flex: 1; }
-.tvbox-img img { width: 100%; height: 400px; object-fit: contain; border-radius: 15px; box-shadow: 0 0 30px rgba(229, 9, 20, 0.4); transition: all 0.4s ease; border: 2px solid #222; background: #000; }
-.tvbox-img img:hover { transform: scale(1.03); box-shadow: 0 0 50px rgba(229, 9, 20, 0.8); border: 2px solid #E50914; }
-.tvbox-img::before { content: ''; position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(229,9,20,0.2) 0%, transparent 70%); transform: translate(-50%, -50%); z-index: -1; filter: blur(20px); }
-.selo { position: absolute; top: -10px; right: -10px; background: #E50914; padding: 10px 15px; border-radius: 50px; font-weight: 900; transform: rotate(15deg); z-index: 2; }
-.tvbox-texto { flex: 1; }
-.tvbox-texto h2 { font-size: 36px; color: #E50914; }
-.tvbox-texto ul { list-style: none; margin: 20px 0; }
-.tvbox-texto li { margin: 10px 0; }
-.preco-tvbox { font-size: 24px; margin: 20px 0; }
-.preco-tvbox span { font-size: 36px; font-weight: 900; color: #E50914; }
-
 .planos { padding: 80px 5%; text-align: center; }
 .planos h2 { font-size: 36px; margin-bottom: 40px; }
 .grid-planos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-.plano { background: #111; padding: 40px 20px; border-radius: 10px; border: 1px solid #222; position: relative; }
+.plano { background: #111; padding: 40px 20px; border-radius: 10px; border: 1px solid #222; position: relative; transition: 0.3s; }
+.plano:hover { transform: translateY(-10px); border: 1px solid #E50914; }
 .plano.destaque { border: 2px solid #E50914; transform: scale(1.05); }
+.plano.destaque:hover { transform: scale(1.08) translateY(-10px); }
 .mais-vendido { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #E50914; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 700; }
 .plano h3 { font-size: 24px; margin-bottom: 20px; }
 .preco { font-size: 40px; font-weight: 900; color: #E50914; }
-.preco span { font-size: 16px; font-weight: 400; color: #AAA; }
-.plano ul { list-style: none; margin: 20px 0; }
+.preco span { font-size: 20px; font-weight: 400; color: #AAA; }
+.plano ul { list-style: none; margin: 20px 0; min-height: 120px; }
 .plano li { margin: 10px 0; }
-.btn-plano { background: #333; color: #FFF; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: 700; cursor: pointer; display: block; }
+.btn-plano { background: #333; color: #FFF; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: 700; cursor: pointer; display: block; transition: 0.3s; }
+.btn-plano:hover { background: #555; }
 .plano.destaque .btn-plano { background: #E50914; }
+.plano.destaque .btn-plano:hover { background: #b20710; }
 
 .depoimentos { padding: 80px 5%; background: #0a0a0a; text-align: center; }
 .depoimentos h2 { font-size: 36px; margin-bottom: 40px; }
 .grid-depo { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 .depo { background: #111; padding: 30px; border-radius: 10px; border-left: 3px solid #E50914; }
-.depo span { color: #AAA; font-size: 14px; }
 
 .faq { padding: 80px 5%; }
 .faq h2 { font-size: 36px; text-align: center; margin-bottom: 40px; }
@@ -79,5 +69,4 @@ footer { text-align: center; padding: 40px 5%; background: #000; border-top: 1px
     .menu { display: none; position: absolute; top: 65px; left: 0; width: 100%; background: #000; flex-direction: column; padding: 20px; border-top: 2px solid #E50914; }
     .menu.active { display: flex; }
     .hero-texto h1 { font-size: 32px; }
-    .tvbox { flex-direction: column; }
-}
+          }
